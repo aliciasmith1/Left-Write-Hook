@@ -14,7 +14,7 @@ This repository contains the code, data processing, analyses, and visualisations
 
 This project uses R, if applicable and the following libraries:
 
-tidyverse
-effectsize
-scales
-ggpubr
+- tidyverse
+- effectsize
+- scales
+- ggpubr
