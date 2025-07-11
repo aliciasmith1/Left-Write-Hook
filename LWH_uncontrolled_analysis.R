@@ -2,11 +2,13 @@
 knitr::knit_hooks$set(purl = knitr::hook_purl)
 knitr::opts_chunk$set(echo = TRUE)
 
+
+## -----------------------------------------------------------------------------
+
 library(tidyverse)
 library(effectsize)
 library(scales)
 library(ggpubr)
-
 
 ## ----Load & wrangle dataset---------------------------------------------------
 qualtrics_dataDesc <- read_csv("LWH_UT_data.csv", show_col_types = F)
@@ -105,19 +107,19 @@ d2[, 27:126] <- lapply(d2[, 27:126], as.numeric)
 d2$Q19_6 = 5 - d2$Q19_6  
 
 # rescore questionnaires are incorrectly scored 
-rescore <- c("DASS-21_1", "DASS-21_2", "DASS-21_3", "DASS-21_4", "DASS-21_5", "DASS-21_6", "DASS-21_7", "DASS-21_8", "DASS-21_9", "DASS-21_10", 
-             "DASS-21_11", "DASS-21_12", "DASS-21_13", "DASS-21_14", "DASS-21_15", "DASS-21_16", "DASS-21_17", "DASS-21_18", "DASS-21_19", "DASS-21_20", "DASS-21_21",
+rescore <- c("DASS.21_1", "DASS.21_2", "DASS.21_3", "DASS.21_4", "DASS.21_5", "DASS.21_6", "DASS.21_7", "DASS.21_8", "DASS.21_9", "DASS.21_10", 
+             "DASS.21_11", "DASS.21_12", "DASS.21_13", "DASS.21_14", "DASS.21_15", "DASS.21_16", "DASS.21_17", "DASS.21_18", "DASS.21_19", "DASS.21_20", "DASS.21_21",
               "Q17_1", "Q17_2", "Q17_3", "Q17_4", "Q17_5", "Q17_6", "Q17_7", "Q17_8", "Q17_9", # rescore ITQ PTSD items
               "Q18_1", "Q18_2", "Q18_3", "Q18_4", "Q18_5", "Q18_6", "Q18_7", "Q18_8", "Q18_9", # rescore ITQ DSO items
-              "Q21_1", "Q21_2", "Q21_3", "Q21_4", "Q21_5", "Q21_6", "Q21_7", "Q21_8", "Q21_9", "Q21_10", "Q21_11", "Q21_12", "Q21_13", "Q21_14") # rescore sHMC items
+              "Q21_1", "Q21_2", "Q21_3", "Q21_4", "Q21_5", "Q21_6", "Q21_7", "Q21_8", "Q21_9", "Q21_10", "Q21_11", "Q21_12", "Q21_13", "Q21_14", "vigorous_PE", "moderate_PE", "walk")
 
 d2[rescore] <- d2[rescore] - 1
 
 # calculate total scores on each scale
-d2 <- d2 |> mutate(DASS_total = rowSums(across('DASS-21_1': 'DASS-21_21')), 
-                    DASS_dep_total = rowSums(across(c('DASS-21_3', 'DASS-21_5', 'DASS-21_10', 'DASS-21_13', 'DASS-21_16', 'DASS-21_17', 'DASS-21_21'))),
-                    DASS_anx_total = rowSums(across(c('DASS-21_2', 'DASS-21_4', 'DASS-21_7', 'DASS-21_9', 'DASS-21_15', 'DASS-21_19', 'DASS-21_20'))),
-                    DASS_stress_total = rowSums(across(c('DASS-21_1', 'DASS-21_6', 'DASS-21_8', 'DASS-21_11', 'DASS-21_12', 'DASS-21_14', 'DASS-21_18'))),
+d2 <- d2 |> mutate(DASS_total = rowSums(across('DASS.21_1': 'DASS.21_21')), 
+                    DASS_dep_total = rowSums(across(c('DASS.21_3', 'DASS.21_5', 'DASS.21_10', 'DASS.21_13', 'DASS.21_16', 'DASS.21_17', 'DASS.21_21'))),
+                    DASS_anx_total = rowSums(across(c('DASS.21_2', 'DASS.21_4', 'DASS.21_7', 'DASS.21_9', 'DASS.21_15', 'DASS.21_19', 'DASS.21_20'))),
+                    DASS_stress_total = rowSums(across(c('DASS.21_1', 'DASS.21_6', 'DASS.21_8', 'DASS.21_11', 'DASS.21_12', 'DASS.21_14', 'DASS.21_18'))),
                     ITQ_PTSD_total = rowSums(across(Q17_1:Q17_6)),  
                     ITQ_PTSD_Re_total = rowSums(across(Q17_1:Q17_2)),
                     ITQ_PTSD_Av_total = rowSums(across(Q17_3:Q17_4)),
