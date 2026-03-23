@@ -10,8 +10,6 @@ library(effectsize)
 library(scales)
 library(ggpubr)
 
-setwd('/Users/alicismith/Library/CloudStorage/OneDrive-SharedLibraries-TheUniversityofMelbourne/Caitlin Hitchcock - Melbourne Mechanisms of Mental Health/Projects/Left Write Hook/Pilot Study 2023/Alicia')
-
 
 ## ----Load & wrangle dataset---------------------------------------------------
 d1 <- read_csv("LWH_UT_data.csv", show_col_types = F)
